@@ -1,0 +1,92 @@
+body {
+  font-family: "Andika New Basic", sans-serif;
+  background-color: whitesmoke;
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:link {
+  color: black;
+}
+
+a:visited {
+  color: black;
+}
+
+a:hover {
+  color: gray;
+  cursor: pointer;
+}
+
+a:active {
+  color: dimgray;
+}
+
+.main-container {
+  height: 100%;
+  font-size: x-large;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+
+.game-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+
+.game-info {
+  flex-basis: 20%;
+  font-size: large;
+}
+
+#game {
+  border: grey 1px solid;
+  position: relative;
+}
+
+.game-over {
+  width: 100%;
+  position: absolute;
+  font-size: x-large;
+  font-weight: bold;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-text-stroke: 1px black;
+}
+
+.row {
+  clear: both;
+}
+
+.cell-grid {
+  float: left;
+  width: 25px;
+  height: 25px;
+  border: grey 1px solid;
+}
+
+.cell-nogrid {
+  float: left;
+  width: 27px;
+  height: 27px;
+}
+
+.fruit {
+  background-color: red;
+}
+
+.snake {
+  background-color: black;
+}
+
+.snake-head {
+  background-color: dimgray;
+}
