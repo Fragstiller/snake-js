@@ -209,24 +209,28 @@ const startGame = async () => {
 
   const goUp = () => {
     if (direction != "down" && directionChanged === false) {
+      window.navigator.vibrate(50);
       direction = "up";
       directionChanged = true;
     }
   }
   const goLeft = () => {
     if (direction != "right" && directionChanged === false) {
+      window.navigator.vibrate(50);
       direction = "left";
       directionChanged = true;
     }
   }
   const goDown = () => {
     if (direction != "up" && directionChanged === false) {
+      window.navigator.vibrate(50);
       direction = "down";
       directionChanged = true;
     }
   }
   const goRight = () => {
     if (direction != "left" && directionChanged === false) {
+      window.navigator.vibrate(50);
       direction = "right";
       directionChanged = true;
     }
