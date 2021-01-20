@@ -200,6 +200,38 @@ const startGame = async () => {
 
   let gameOver = false;
 
+  // Mobile controls
+  let upBtn = document.getElementById("arrow-up");
+  let leftBtn = document.getElementById("arrow-left");
+  let downBtn = document.getElementById("arrow-down");
+  let rightBtn = document.getElementById("arrow-right");
+
+  upBtn.addEventListener("click", event => {
+    if (direction != "down" && directionChanged === false) {
+      direction = "up";
+      directionChanged = true;
+    }
+  })
+  leftBtn.addEventListener("click", event => {
+    if (direction != "right" && directionChanged === false) {
+      direction = "left";
+      directionChanged = true;
+    }
+  })
+  downBtn.addEventListener("click", event => {
+    if (direction != "up" && directionChanged === false) {
+      direction = "down";
+      directionChanged = true;
+    }
+  })
+  rightBtn.addEventListener("click", event => {
+    if (direction != "left" && directionChanged === false) {
+      direction = "right";
+      directionChanged = true;
+    }
+  })
+
+  // PC controls
   const inputHandler = (event) => {
     switch (event.key.toLowerCase()) {
       case "w":

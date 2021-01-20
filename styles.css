@@ -91,21 +91,21 @@ a:active {
   position: absolute;
 }
 
-.arrow-up {
+#arrow-up {
   left: calc(50% - 25px);
 }
 
-.arrow-left {
+#arrow-left {
   left: calc(50% - 75px);
   top: 50px;
 }
 
-.arrow-down {
+#arrow-down {
   left: calc(50% - 25px);
   top: 100px;
 }
 
-.arrow-right {
+#arrow-right {
   left: calc(50% + 25px);
   top: 50px;
 }
