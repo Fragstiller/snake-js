@@ -386,11 +386,20 @@ const createSettings = () => {
 
   let sizeSetting = document.getElementById("size-setting");
   sizeSetting.addEventListener("click", (event) => {
-    if (SETTINGS.nextSize < 19) {
-      SETTINGS.nextSize += 2;
+    if (screen.width > 768) {
+      if (SETTINGS.nextSize < 19) {
+        SETTINGS.nextSize += 2;
+      } else {
+        SETTINGS.nextSize = 5;
+      }
     } else {
-      SETTINGS.nextSize = 5;
+      if (SETTINGS.nextSize < 9) {
+        SETTINGS.nextSize += 2;
+      } else {
+        SETTINGS.nextSize = 5;
+      }
     }
+
     sizeSetting.innerHTML = SETTINGS.nextSize + "x" + (SETTINGS.nextSize + 1);
 
     localStorage.setItem("SAVED_SETTINGS", JSON.stringify(SETTINGS));
