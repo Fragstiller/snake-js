@@ -39,11 +39,75 @@ a:active {
   justify-content: center;
   text-align: center;
   align-items: center;
+  flex-direction: row;
+}
+
+@media (max-width: 768px) {
+  .game-container {
+    flex-direction: column-reverse !important;
+  }
 }
 
 .game-info {
   flex-basis: 20%;
   font-size: large;
+}
+
+@media (max-width: 768px) {
+  .game-info {
+    display: none;
+  }
+}
+
+.game-settings {
+  flex-basis: 20%;
+  font-size: large;
+}
+
+.game-controls-mobile {
+  flex-basis: 20%;
+  font-size: large;
+}
+
+@media (min-width: 768px) {
+  .game-controls-mobile {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .settings-additional {
+    display: none;
+  }
+}
+
+.game-controls-mobile-arrows {
+  position: relative;
+  min-height: 150px;
+}
+
+.game-controls-mobile-arrows img {
+  width: 50px;
+  position: absolute;
+}
+
+.arrow-up {
+  left: calc(50% - 25px);
+}
+
+.arrow-left {
+  left: calc(50% - 75px);
+  top: 50px;
+}
+
+.arrow-down {
+  left: calc(50% - 25px);
+  top: 100px;
+}
+
+.arrow-right {
+  left: calc(50% + 25px);
+  top: 50px;
 }
 
 #game {
