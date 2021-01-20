@@ -205,68 +205,71 @@ const startGame = async () => {
   let leftBtn = document.getElementById("arrow-left");
   let downBtn = document.getElementById("arrow-down");
   let rightBtn = document.getElementById("arrow-right");
+  let reloadBtn = document.getElementById("mobile-reload");
 
-  upBtn.addEventListener("click", event => {
+  const goUp = () => {
     if (direction != "down" && directionChanged === false) {
       direction = "up";
       directionChanged = true;
     }
-  })
-  leftBtn.addEventListener("click", event => {
+  }
+  const goLeft = () => {
     if (direction != "right" && directionChanged === false) {
       direction = "left";
       directionChanged = true;
     }
-  })
-  downBtn.addEventListener("click", event => {
+  }
+  const goDown = () => {
     if (direction != "up" && directionChanged === false) {
       direction = "down";
       directionChanged = true;
     }
-  })
-  rightBtn.addEventListener("click", event => {
+  }
+  const goRight = () => {
     if (direction != "left" && directionChanged === false) {
       direction = "right";
       directionChanged = true;
     }
-  })
+  }
+  const reloadGame = () => {
+    gameOver = true;
+    document.removeEventListener("keydown", inputHandler, false);
+    upBtn.removeEventListener("click", goUp, false);
+    leftBtn.removeEventListener("click", goLeft, false);
+    downBtn.removeEventListener("click", goDown, false);
+    rightBtn.removeEventListener("click", goRight, false);
+    reloadBtn.removeEventListener("click", reloadGame, false);
+    destroyGame();
+    createGame();
+  }
+
+  upBtn.addEventListener("click", goUp);
+  leftBtn.addEventListener("click", goLeft);
+  downBtn.addEventListener("click", goDown);
+  rightBtn.addEventListener("click", goRight);
+  reloadBtn.addEventListener("click", reloadGame);
 
   // PC controls
   const inputHandler = (event) => {
     switch (event.key.toLowerCase()) {
       case "w":
       case "arrowup":
-        if (direction != "down" && directionChanged === false) {
-          direction = "up";
-          directionChanged = true;
-        }
+        goUp();
         break;
       case "s":
       case "arrowdown":
-        if (direction != "up" && directionChanged === false) {
-          direction = "down";
-          directionChanged = true;
-        }
+        goDown();
         break;
       case "a":
       case "arrowleft":
-        if (direction != "right" && directionChanged === false) {
-          direction = "left";
-          directionChanged = true;
-        }
+        goLeft();
         break;
       case "d":
       case "arrowright":
-        if (direction != "left" && directionChanged === false) {
-          direction = "right";
-          directionChanged = true;
-        }
+        goRight();
         break;
       case "enter":
-        gameOver = true;
-        document.removeEventListener("keydown", inputHandler, false);
-        destroyGame();
-        createGame();
+        reloadGame();
     }
   };
 
@@ -322,10 +325,18 @@ const createGame = () => {
   drawSnake(createSnake(), [], true);
   createNewFruit();
 
+  const cleanupAndStart = () => {
+    startBtn.removeEventListener("click", cleanupAndStart, false);
+    document.removeEventListener("keydown", checkSpacebar, false);
+    startGame();
+  }
+
+  let startBtn = document.getElementById("mobile-start");
+  startBtn.addEventListener("click", cleanupAndStart);
+
   const checkSpacebar = (event) => {
     if (event.key === " ") {
-      document.removeEventListener("keydown", checkSpacebar, false);
-      startGame();
+      cleanupAndStart();
     }
   };
 
