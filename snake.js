@@ -15,7 +15,7 @@ if (SETTINGS === null) {
   SETTINGS = JSON.parse(SETTINGS);
 }
 
-const createGrid = () => {
+function createGrid() {
   let gameDiv = document.getElementById("game");
   gameDiv.style.height = 25 * SETTINGS.size + SETTINGS.size * 2;
   gameDiv.style.width = 25 * (SETTINGS.size + 1) + (SETTINGS.size + 1) * 2;
@@ -33,9 +33,9 @@ const createGrid = () => {
   }
 
   gameDiv.innerHTML = gameHtml;
-};
+}
 
-const createNewFruit = () => {
+function createNewFruit() {
   if (FRAME === 0) {
     document
       .getElementById(
@@ -59,18 +59,18 @@ const createNewFruit = () => {
     ];
 
   document.getElementById(fruitPos).classList.add("fruit");
-};
+}
 
-const createSnake = () => {
+function createSnake() {
   let snakeSegments = [
     { x: 3, y: Math.floor(SETTINGS.size / 2) },
     { x: 2, y: Math.floor(SETTINGS.size / 2) },
     { x: 1, y: Math.floor(SETTINGS.size / 2) },
   ];
   return snakeSegments;
-};
+}
 
-const moveSnake = (direction, oldSegments) => {
+function moveSnake(direction, oldSegments) {
   let newSegments = JSON.parse(JSON.stringify(oldSegments));
   let head = newSegments[0];
 
@@ -93,9 +93,9 @@ const moveSnake = (direction, oldSegments) => {
   }
 
   return newSegments;
-};
+}
 
-const drawSnake = (newSegments, oldSegments, fullDraw = false) => {
+function drawSnake(newSegments, oldSegments, fullDraw = false) {
   let newHead = newSegments[0];
   let oldHead = oldSegments[0];
 
@@ -149,9 +149,9 @@ const drawSnake = (newSegments, oldSegments, fullDraw = false) => {
       .getElementById(oldTail.y * (SETTINGS.size + 1) + oldTail.x)
       .classList.remove("snake");
   }
-};
+}
 
-const checkFruitCollision = (segments) => {
+function checkFruitCollision(segments) {
   let head = segments[0];
   let headClasses = document.getElementById(
     head.y * (SETTINGS.size + 1) + head.x
@@ -166,9 +166,9 @@ const checkFruitCollision = (segments) => {
     SCORE++;
     if (SCORE !== SETTINGS.size * (SETTINGS.size + 1) - 2) createNewFruit();
   }
-};
+}
 
-const checkSelfCollision = (segments) => {
+function checkSelfCollision(segments) {
   let head = segments[0];
 
   for (let i = 1; i < segments.length; i++) {
@@ -178,9 +178,9 @@ const checkSelfCollision = (segments) => {
   }
 
   return false;
-};
+}
 
-const checkWallCollision = (segments) => {
+function checkWallCollision(segments) {
   let head = segments[0];
 
   if (
@@ -192,9 +192,9 @@ const checkWallCollision = (segments) => {
     return true;
 
   return false;
-};
+}
 
-const startGame = async () => {
+async function startGame() {
   let direction = "right";
   let directionChanged = false;
 
@@ -207,35 +207,39 @@ const startGame = async () => {
   let rightBtn = document.getElementById("arrow-right");
   let reloadBtn = document.getElementById("mobile-reload");
 
-  const goUp = () => {
+  function goUp() {
     if (direction != "down" && directionChanged === false) {
       navigator.vibrate(30);
       direction = "up";
       directionChanged = true;
     }
   }
-  const goLeft = () => {
+
+  function goLeft() {
     if (direction != "right" && directionChanged === false) {
       navigator.vibrate(30);
       direction = "left";
       directionChanged = true;
     }
   }
-  const goDown = () => {
+
+  function goDown() {
     if (direction != "up" && directionChanged === false) {
       navigator.vibrate(30);
       direction = "down";
       directionChanged = true;
     }
   }
-  const goRight = () => {
+
+  function goRight() {
     if (direction != "left" && directionChanged === false) {
       navigator.vibrate(30);
       direction = "right";
       directionChanged = true;
     }
   }
-  const reloadGame = () => {
+
+  function reloadGame() {
     gameOver = true;
     document.removeEventListener("keydown", inputHandler, false);
     upBtn.removeEventListener("click", goUp, false);
@@ -254,7 +258,7 @@ const startGame = async () => {
   reloadBtn.addEventListener("click", reloadGame);
 
   // PC controls
-  const inputHandler = (event) => {
+  function inputHandler(event) {
     switch (event.key.toLowerCase()) {
       case "w":
       case "arrowup":
@@ -275,7 +279,7 @@ const startGame = async () => {
       case "enter":
         reloadGame();
     }
-  };
+  }
 
   document.addEventListener("keydown", inputHandler);
 
@@ -317,9 +321,9 @@ const startGame = async () => {
       );
     }
   }
-};
+}
 
-const createGame = () => {
+function createGame() {
   SETTINGS.size = SETTINGS.nextSize;
 
   SCORE = 0;
@@ -329,7 +333,7 @@ const createGame = () => {
   drawSnake(createSnake(), [], true);
   createNewFruit();
 
-  const cleanupAndStart = () => {
+  function cleanupAndStart() {
     startBtn.removeEventListener("click", cleanupAndStart, false);
     document.removeEventListener("keydown", checkSpacebar, false);
     startGame();
@@ -338,20 +342,20 @@ const createGame = () => {
   let startBtn = document.getElementById("mobile-start");
   startBtn.addEventListener("click", cleanupAndStart);
 
-  const checkSpacebar = (event) => {
+  function checkSpacebar(event) {
     if (event.key === " ") {
       cleanupAndStart();
     }
-  };
+  }
 
   document.addEventListener("keydown", checkSpacebar);
-};
+}
 
-const destroyGame = () => {
+function destroyGame() {
   document.getElementById("game").innerHTML = "";
-};
+}
 
-const createSettings = () => {
+function createSettings() {
   let gridSetting = document.getElementById("grid-setting");
   gridSetting.addEventListener("click", (event) => {
     if (SETTINGS.grid === true) {
@@ -438,7 +442,7 @@ const createSettings = () => {
   }
   sizeSetting.innerHTML = SETTINGS.nextSize + "x" + (SETTINGS.nextSize + 1);
   trackerSetting.innerHTML = SETTINGS.tracker ? "on" : "off";
-};
+}
 
 document.addEventListener("DOMContentLoaded", () => {
   createGame();
