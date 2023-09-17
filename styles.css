@@ -45,6 +45,7 @@ a:active {
 @media (max-width: 768px) {
   .game-container {
     flex-direction: column-reverse !important;
+    gap: 2rem;
   }
 }
 
@@ -123,7 +124,7 @@ a:active {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -webkit-text-stroke: 1px black;
+  -webkit-text-stroke: 0.25px black;
 }
 
 .row {

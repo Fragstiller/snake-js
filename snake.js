@@ -17,9 +17,6 @@ if (SETTINGS === null) {
 
 function createGrid() {
   let gameDiv = document.getElementById("game");
-  gameDiv.style.height = 25 * SETTINGS.size + SETTINGS.size * 2;
-  gameDiv.style.width = 25 * (SETTINGS.size + 1) + (SETTINGS.size + 1) * 2;
-
   let gameHtml = "";
 
   for (let i = 0; i < SETTINGS.size; i++) {
